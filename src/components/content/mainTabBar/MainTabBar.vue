@@ -7,10 +7,10 @@
             首页
           </template>
           <template v-slot:icon>
-            <img src="～assets/img/tabbar/home.svg" />
+            <img src="@/assets/img/tabbar/home.svg" />
           </template>
           <template v-slot:icon-active>
-            <img src="～assets/img/tabbar/home_active.svg" />
+            <img src="@/assets/img/tabbar/home_active.svg" />
           </template>
         </tab-bar-item>
         <tab-bar-item path="/category">
@@ -18,10 +18,10 @@
             分类
           </template>
           <template v-slot:icon>
-            <img src="～assets/img/tabbar/category.svg" />
+            <img src="@/assets/img/tabbar/category.svg" />
           </template>
           <template v-slot:icon-active>
-            <img src="～assets/img/tabbar/category_active.svg" />
+            <img src="@/assets/img/tabbar/category_active.svg" />
           </template>
         </tab-bar-item>
         <tab-bar-item path="/cart">
@@ -29,10 +29,10 @@
             购物车
           </template>
           <template v-slot:icon>
-            <img src="～assets/img/tabbar/shopcart.svg" />
+            <img src="@/assets/img/tabbar/shopcart.svg" />
           </template>
           <template v-slot:icon-active>
-            <img src="～assets/img/tabbar/shopcart_active.svg" />
+            <img src="@/assets/img/tabbar/shopcart_active.svg" />
           </template>
         </tab-bar-item>
         <tab-bar-item path="/profile">
@@ -40,10 +40,10 @@
             我的
           </template>
           <template v-slot:icon>
-            <img src="～assets/img/tabbar/profile.svg" />
+            <img src="@/assets/img/tabbar/profile.svg" />
           </template>
           <template v-slot:icon-active>
-            <img src="～assets/img/tabbar/profile_active.svg" />
+            <img src="@/assets/img/tabbar/profile_active.svg" />
           </template>
         </tab-bar-item>
       </template>
