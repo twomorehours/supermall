@@ -37,32 +37,7 @@ export default {
       goods:{
         pop: {
           page:0,
-          list:[
-            {
-              show: {
-                img: 'https://s10.mogucdn.com/mlcdn/c45406/180913_8d4e5adi8llg7c47lgh2291akiec7_225x225.png',
-              },
-              title: 'ABC',
-              price: '100.00',
-              cfav: 99,
-            },
-            {
-              show: {
-                img: 'https://s10.mogucdn.com/mlcdn/c45406/180913_8d4e5adi8llg7c47lgh2291akiec7_225x225.png',
-              },
-              title: 'ABC',
-              price: '100.00',
-              cfav: 99,
-            },
-            {
-              show: {
-                img: 'https://s10.mogucdn.com/mlcdn/c45406/180913_8d4e5adi8llg7c47lgh2291akiec7_225x225.png',
-              },
-              title: 'ABC',
-              price: '100.00',
-              cfav: 99,
-            },
-          ],
+          list:[],
         },
         new: {
           page:0,
@@ -96,11 +71,9 @@ export default {
     },
     getGoods(type){
       let page = this.goods[type].page + 1;
-      getGoods(type,page).then(res => {
-
-       // console.log(res);
-
-       this.goods[type].page++;
+        getGoods(type,page).then(res => {
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page++;
       });
     },
     tabClick(index) {
