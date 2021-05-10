@@ -1,16 +1,22 @@
 <template>
-<div>
+<div id="home" class="wrapper">
   <nav-bar class="home-nav">
     <template v-slot:center>
       <span>购物街</span>
     </template>
   </nav-bar>
-  <home-swiper :banners="banners"/>
-  <recommend-view :recommends="recommends"/>
-  <feature-view />
-  <tab-control :titles="titles" @tabClick="tabClick" />
-  <goods-list :goods="selectedGoods" />
+  <scroll class="content" :probe-type="3"  :pull-up-load="true"
+    ref="scroll" @onScroll="scrollPos" @onPullUp="pullUp" >
+    <template>
+      <home-swiper :banners="banners"/>
+      <recommend-view :recommends="recommends"/>
+      <feature-view />
+      <tab-control :titles="titles" @tabClick="tabClick" />
+      <goods-list :goods="selectedGoods" />
+    </template>
+  </scroll>
 
+  <back-top @click.native="backTop" v-show="showBackTop" />
 </div>
 </template>
 
@@ -18,6 +24,8 @@
 import NavBar from 'components/common/navbar/NavBar.vue';
 import TabControl from 'components/content/tabControl/TabControl.vue';
 import GoodsList from 'components/content/goods/GoodsList.vue';
+import Scroll from 'components/common/scroll/Scroll.vue';
+import BackTop from 'components/content/backTop/BackTop.vue';
 
 import HomeSwiper from './childComps/HomeSwiper.vue';
 import RecommendView from './childComps/RecommendView.vue';
@@ -48,6 +56,7 @@ export default {
           list:[],
         },
       },
+      showBackTop: false,
     };
   },
   created() {
@@ -74,6 +83,8 @@ export default {
         getGoods(type,page).then(res => {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page++;
+
+        this.$refs.scroll.finishPullUp();
       });
     },
     tabClick(index) {
@@ -89,6 +100,15 @@ export default {
             break;
         }
     },
+    scrollPos(pos) {
+      this.showBackTop = -pos.y > 1000;
+    },
+    pullUp() {
+      this.getGoods(this.currentType);
+    },
+    backTop(){
+      this.$refs.scroll.scrollTo(0,0);
+    },
   },
   components: {
     NavBar,
@@ -97,11 +117,19 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
+    Scroll,
+    BackTop,
   },
 };
 </script>
 
-<style>
+<style scoped>
+#home {
+  /*padding-top: 44px;*/
+  height: 100vh;
+  position: relative;
+}
+
 .home-nav {
   background-color: var(--color-tint);
   color: #fff;
@@ -112,4 +140,21 @@ export default {
   top: 0;
   z-index: 9;
 }
+
+.tab-control {
+  position: sticky;
+  top: 44px;
+  z-index: 9;
+}
+
+.content {
+  overflow: hidden;
+
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
+}
+
 </style>
