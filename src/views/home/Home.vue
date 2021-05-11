@@ -66,6 +66,13 @@ export default {
     this.getGoods('new');
     this.getGoods('sell');
   },
+
+  mounted() {
+    this.$bus.$on('imageLoad', () => {
+      this.$refs.scroll.refresh();
+    });
+  },
+
   computed: {
     selectedGoods(){
        return this.goods[this.currentType].list;

@@ -27,6 +27,9 @@ export default {
     Swiper,
     SwiperItem,
   },
+  methods: {
+    
+  }
 };
 </script>
 

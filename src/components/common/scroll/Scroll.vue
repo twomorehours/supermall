@@ -33,20 +33,28 @@ export default {
      pullUpLoad: this.pullUpLoad,
    });
 
-   this.scroll.on('scroll', (position) => {
-     this.$emit("onScroll",position);
-   });
+  if(this.probeType == 2 || this.probeType == 3){
+    this.scroll.on('scroll', (position) => {
+      this.$emit("onScroll",position);
+    });
+  }
 
-   this.scroll.on('pullingUp', () => {
-     this.$emit("onPullUp");
-   });
+  if(this.pullUpLoad){
+    this.scroll.on('pullingUp', () => {
+      this.$emit("onPullUp");
+    });
+  }
+
  },
  methods: {
-   scrollTo(x,y){
-     this.scroll.scrollTo(x,y);
+   scrollTo(x,y,time=300){
+     this.scroll && this.scroll.scrollTo(x,y,time);
    },
    finishPullUp(){
-     this.scroll.finishPullUp();
+    this.scroll && this.scroll.finishPullUp();
+   },
+   refresh(){
+    this.scroll && this.scroll.refresh();
    },
  }
 };
