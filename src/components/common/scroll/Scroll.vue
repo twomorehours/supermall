@@ -56,6 +56,13 @@ export default {
    refresh(){
     this.scroll && this.scroll.refresh();
    },
+   currentY() {
+     if(this.scroll){
+       return this.scroll.y;
+     }else{
+       return 0;
+     }
+   },
  }
 };
 </script>

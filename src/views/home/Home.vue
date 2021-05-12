@@ -61,6 +61,7 @@ export default {
       showBackTop: false,
       tabControlOffsetTop: 0,
       tabFixed: 0,
+      scrollY: 0,
     };
   },
   created() {
@@ -79,6 +80,16 @@ export default {
       refresh();
     });
   },
+
+  activated(){
+    this.$refs.scroll.scrollTo(0,this.scrollY);
+  },
+
+
+  deactivated(){
+    this.scrollY = this.$refs.scroll.currentY();
+  },
+
 
   computed: {
     selectedGoods(){
