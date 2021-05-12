@@ -33,6 +33,7 @@ import FeatureView from './childComps/FeatureView.vue';
 
 
 import {getHomeMultidata,getGoods} from 'network/home.js';
+import {debounce} from 'common/utils.js';
 
 export default {
   name: 'Home',
@@ -68,8 +69,11 @@ export default {
   },
 
   mounted() {
+
+    let refresh = debounce(this.$refs.scroll.refresh,1000);
+
     this.$bus.$on('imageLoad', () => {
-      this.$refs.scroll.refresh();
+      refresh();
     });
   },
 
