@@ -5,13 +5,14 @@
       <span>购物街</span>
     </template>
   </nav-bar>
+  <tab-control :titles="titles" @tabClick="tabClick" ref="tabControl1" v-show="tabFixed"/>
   <scroll class="content" :probe-type="3"  :pull-up-load="true"
     ref="scroll" @onScroll="scrollPos" @onPullUp="pullUp" >
     <template>
-      <home-swiper :banners="banners"/>
+      <home-swiper :banners="banners" @imageLoad="swiperLoad"/>
       <recommend-view :recommends="recommends"/>
       <feature-view />
-      <tab-control :titles="titles" @tabClick="tabClick" />
+      <tab-control :titles="titles" @tabClick="tabClick" ref="tabControl"/>
       <goods-list :goods="selectedGoods" />
     </template>
   </scroll>
@@ -58,6 +59,8 @@ export default {
         },
       },
       showBackTop: false,
+      tabControlOffsetTop: 0,
+      tabFixed: 0,
     };
   },
   created() {
@@ -110,15 +113,22 @@ export default {
             this.currentType = 'sell';
             break;
         }
+        this.$refs.tabControl.currIndex = index;
+        this.$refs.tabControl1.currIndex = index;
     },
     scrollPos(pos) {
       this.showBackTop = -pos.y > 1000;
+      this.tabFixed = -pos.y > this.tabControlOffsetTop;
+
     },
     pullUp() {
       this.getGoods(this.currentType);
     },
     backTop(){
       this.$refs.scroll.scrollTo(0,0);
+    },
+    swiperLoad(){
+      this.tabControlOffsetTop = this.$refs.tabControl.$el.offsetTop;
     },
   },
   components: {
