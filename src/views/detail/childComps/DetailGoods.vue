@@ -36,7 +36,8 @@ export default {
   },
   computed: {
     services() {
-      return this.goods.services.filter((item) => item.icon && item.name !== '72小时发货');
+      // return this.goods.services.filter((item) => item.icon && item.name !== '72小时发货');
+      return this.goods.services;
     },
   },
 };

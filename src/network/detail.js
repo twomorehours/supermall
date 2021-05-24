@@ -19,10 +19,9 @@ export class Goods {
     this.price = itemInfo.price;
     this.discountBgColor = itemInfo.discountBgColor;
     this.discountDesc = itemInfo.discountDesc;
-
     this.columns = columns;
-
     this.services = services;
+
   }
 }
 
@@ -33,5 +32,13 @@ export class ShopInfo {
     this.goods = shopInfo.cGoods;
     this.sells = shopInfo.cSells;
     this.name = shopInfo.name;
+  }
+}
+
+export class GoodsParam {
+  constructor(info, rule) {
+    this.image = info.images ? info.images[0] : '';
+    this.infos = info.set;
+    this.sizes = rule.tables;
   }
 }
